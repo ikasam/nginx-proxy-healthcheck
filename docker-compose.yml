@@ -1,0 +1,13 @@
+version: '2'
+services:
+  nginx:
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./conf.d/healthcheck.conf:/etc/nginx/conf.d/healthcheck.conf:ro
+  app:
+    image: nginx
+    environment:
+      - VIRTUAL_HOST=localhost
